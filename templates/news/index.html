@@ -1,0 +1,37 @@
+{% extends '_layouts/base.html' %}
+
+{% block content %}
+    <div class="content-panel">
+        <div class="section">
+		<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<!-- ------------------------------------------------------------ -->
+						<h2 class="section-title" style="color:darkcyan; text-align: center; font-style: italic;">
+							Новини
+						</h2>
+						<div class="news-list">
+    						{% for item in news %}
+        						<div class="news-item">
+            						<h3>{{ item.title }}</h3>
+            						<p>{{ item.content|truncatewords:30 }}</p>
+            						<small>
+                						Категорія: {{ item.category }} |
+                						Автор: {{ item.author }} |
+                						Дата: {{ item.created_at|date:"d.m.Y H:i" }}
+            						</small>
+        						</div>
+    						{% empty %}
+        						<p>Новин поки немає.</p>
+    						{% endfor %}
+						</div>
+                     </h3>
+					<!-- ------------------------------------------------------------ -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+    </div>
+{% endblock %}

@@ -1,0 +1,291 @@
+{% extends '_layouts/base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="content-panel">
+	<div class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+				<!-- ------------------------------------------------------------ -->
+				<div id="aside" class="col-md-3">
+					<form method="GET" id="filterForm">
+						<!-- aside Widget -->
+						<div class="aside categories">
+							<h3 class="aside-title">Категорії</h3>
+							<div class="checkbox-filter">
+								{% for c in categories %}
+								<div class="input-checkbox">
+									<input type="radio" id="{{ c.id }}" name="category" value="{{ c.id }}" {% if
+										selected_category_id|stringformat:"s"==c.id|stringformat:"s" %}checked{% endif
+										%}>
+									<label for="{{ c.id }}" style="font-size: 1em; padding-left: 5px;">
+										<span></span>
+										{{ c.name }}
+										<small>(0)</small>
+									</label>
+								</div>
+								{% endfor %}
+							</div>
+						</div>
+						<!-- /aside Widget -->
+
+						<!-- aside Widget -->
+						<div class="aside prices">
+							<h3 class="aside-title">Ціни</h3>
+							<div class="price-filter">
+								<div id="price-slider"></div>
+								<div class="input-number price-min">
+									<input id="price-min" type="number">
+									<span class="qty-up">+</span>
+									<span class="qty-down">-</span>
+								</div>
+								<span>-</span>
+								<div class="input-number price-max">
+									<input id="price-max" type="number">
+									<span class="qty-up">+</span>
+									<span class="qty-down">-</span>
+								</div>
+							</div>
+						</div>
+						<!-- /aside Widget -->
+
+						<!-- aside Widget -->
+						<div class="aside producers">
+							<h3 class="aside-title">Виробники</h3>
+							<div class="checkbox-filter">
+								{% for p in producers %}
+								<div class="input-checkbox">
+									<input type="radio" id="producer-{{ p.id }}" name="producer" value="{{ p.id }}" {%
+										if selected_producer_id|stringformat:"s"==p.id|stringformat:"s" %}checked{%
+										endif %}>
+									<label for="producer-{{ p.id }}">
+										<span></span>
+										{{ p.name }}
+									</label>
+								</div>
+								{% endfor %}
+							</div>
+						</div>
+						<!-- /aside Widget -->
+
+						<!-- filter buttons -->
+						<p style="padding: 20px; text-align: center;">
+							<button type="submit" class="btn btn-success" style="margin-bottom: 8px; width: 200px;">
+								Застосувати фільтри
+							</button>
+							<a href="/catalog" class="btn btn-danger" style="width: 200px;">
+								Скинути фільтри
+							</a>
+						</p>
+						<!-- /filter buttons -->
+
+						<!-- aside Widget -->
+						<div class="aside top">
+							<h3 class="aside-title">Лідери продажів</h3>
+							<div class="product-widget">
+								<div class="product-img">
+									<img src="{% static 'img/product01.png' %}" alt="">
+								</div>
+								<div class="product-body">
+									<p class="product-category">Category</p>
+									<h3 class="product-name"><a href="#">product name goes here</a></h3>
+									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+								</div>
+							</div>
+
+							<div class="product-widget">
+								<div class="product-img">
+									<img src="{% static 'img/product02.png' %}" alt="">
+								</div>
+								<div class="product-body">
+									<p class="product-category">Category</p>
+									<h3 class="product-name"><a href="#">product name goes here</a></h3>
+									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+								</div>
+							</div>
+
+							<div class="product-widget">
+								<div class="product-img">
+									<img src="{% static 'img/product03.png' %}" alt="">
+								</div>
+								<div class="product-body">
+									<p class="product-category">Category</p>
+									<h3 class="product-name"><a href="#">product name goes here</a></h3>
+									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+								</div>
+							</div>
+						</div>
+						<!-- /aside Widget -->
+					</form>
+				</div>
+				<div id="store" class="col-md-9">
+					<!-- store top filter -->
+					<div id="top-filter" class="store-filter clearfix">
+						<div class="store-sort">
+							<label>
+								Сортування:
+								<select class="input-select">
+									<option value="0">За популярністю</option>
+									<option value="1">За алфавітом</option>
+									<option value="2">За датою</option>
+								</select>
+							</label>
+
+							<label>
+								Пагінація:
+								<select class="input-select">
+									<option value="0">10</option>
+									<option value="1">20</option>
+									<option value="2">30</option>
+								</select>
+							</label>
+						</div>
+						<ul class="store-grid">
+							<li class="active"><i class="fa fa-th"></i></li>
+							<li><a href="#"><i class="fa fa-th-list"></i></a></li>
+						</ul>
+					</div>
+					<!-- /store top filter -->
+					{% if user.username == 'admin123' %}
+					<a href="/catalog/create" class="btn btn-primary">Додати товар</a>
+					{% endif %}
+					<!-- store products -->
+					<div id="gallery" class="row">
+						{% for p in products %}
+						<!-- product -->
+						<div class="col-md-4 col-xs-6">
+							<div class="product">
+								<div class="product-img">
+									<img src="/media/{{ p.photo }}" alt="">
+									<div class="product-label">
+										<span class="sale">-5%</span>
+										<span class="new">Новий</span>
+									</div>
+								</div>
+								<div class="product-body">
+									<p class="product-category">{{ p.category }}</p>
+									<h3 class="product-name"><a href="#">{{ p.name }}</a></h3>
+									<h4 class="product-price">{{ p.price }}0 usd</h4>
+									<div class="product-rating">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+									</div>
+									<div class="product-btns">
+										<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
+												class="tooltipp">до обраних</span></button>
+										<button class="add-to-compare"><i class="fa fa-exchange"></i><span
+												class="tooltipp">порівняння</span></button>
+										<button class="quick-view"><i class="fa fa-eye"></i><span
+												class="tooltipp">Перегляд</span></button>
+									</div>
+								</div>
+								<div class="add-to-cart">
+									<input type="hidden" value="{{ p.id }}">
+									<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> до
+										кошика</button>
+								</div>
+							</div>
+						</div>
+						<!-- /product -->
+						{% endfor %}
+					</div>
+					<!-- /store products -->
+
+					<!-- store bottom filter -->
+					<!-- <div id="bottom-filter" class="store-filter clearfix">
+						<span class="store-qty">Showing 20-100 products</span>
+						<ul class="store-pagination">
+							<li class="active">1</li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+						</ul>
+					</div> -->
+					<div class="pagination">
+						{% if products.has_previous %}
+						<a href="?page={{ products.previous_page_number }}
+        					{% if selected_category_id %}&category={{ selected_category_id }}{% endif %}
+        						{% if selected_producer_id %}&category={{ selected_producer_id }}{% endif %}">
+							Попередня
+						</a>
+						{% else %}
+						<span class="disabled">Попередня</span>
+						{% endif %}
+
+
+						<span class="current-page">
+    						Сторінки {{ products.number }} з {{ products.paginator.num_pages }}
+						</span>
+						{% if products.has_next %}
+						<a href="?page={{ products.next_page_number }}
+        					{% if selected_category_id %}&category={{ selected_category_id }}{% endif %}
+        					{% if selected_producer_id %}&category={{ selected_producer_id }}{% endif %}">
+							Наступна
+						</a>
+						{% else %}
+						<span class="disabled">Наступна</span>
+						{% endif %}
+					</div>
+					<!-- /store bottom filter -->
+				</div>
+				<!-- ------------------------------------------------------------ -->
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+</div>
+<style>
+	.pagination {
+		margin-top: 20px;
+		text-align: center;
+	}
+
+	.pagination a,
+
+	.pagination span {
+
+		display: inline-block;
+
+		padding: 8px 12px;
+
+		margin: 0 5px;
+
+		border: 1px solid #ddd;
+
+		text-decoration: none;
+
+		color: #007bff;
+
+		border-radius: 4px;
+
+	}
+
+	.pagination .current-page {
+
+		background-color: #007bff;
+
+		color: white;
+
+		border-color: #007bff;
+
+	}
+
+	.pagination .disabled {
+
+		color: #ccc;
+
+		pointer-events: none;
+
+		cursor: default;
+
+	}
+</style>
+<script src="{% static 'js/cart.js' %}"></script>
+{% endblock %}
