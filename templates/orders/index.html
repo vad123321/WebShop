@@ -1,6 +1,7 @@
 {% extends '_layouts/base.html' %}
 
 {% block content %}
+{% load static %}
     <div class="content-panel">
         <div class="section">
 		<!-- container -->
@@ -8,9 +9,39 @@
 				<!-- row -->
 				<div class="row">
 					<!-- ------------------------------------------------------------ -->
-                     <h3 style="color:darkcyan; text-align: center; font-style: italic;">
-                        {{ title }}
-                     </h3>
+                     <table class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Замовлення</th>
+								<th>Товар</th>
+								<th>Ціна</th>
+								<th>Дата</th>
+								<th>Статус</th>
+								<th>Вибір</th>
+								<th>Видалення</th>
+							</tr>
+						</thead>
+						<body>
+							{% for order in user_orders %}
+								<tr>
+									<td>{{ order.id }}</td>
+									<td>{{ order.title }}</td>
+									<td>{{ order.product.name }}</td>
+									<td>{{ order.amount }}</td>
+									<td>{{ order.date }}</td>
+									<td>{{ order.notes }}</td>
+									<td><input type="checkbox" class="check" value="jes" checked></td>
+									<td>
+										<input type="hidden" value="{{ order.id }}">
+										<button class="btn btn-sm btn-warning del-btn">
+											Видалити
+										</button>
+									</td>
+								</tr>
+							{% endfor %}
+						</body>
+					 </table>
 					<!-- ------------------------------------------------------------ -->
 				</div>
 				<!-- /row -->
@@ -18,4 +49,9 @@
 			<!-- /container -->
 		</div>
     </div>
+	<style>
+		td {
+			vertical-align: middle !important;
+		}
+	</style>
 {% endblock %}
