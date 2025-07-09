@@ -40,6 +40,21 @@ def ajax_cart(request):
     # 5 - Відправляєм дані клієнту:
     return JsonResponse(response)
 
+def ajax_cart_indicate(request):
+    response = dict()
+    uid = request.GET['uid']
+    user_orders = Order.objects.filter(user_id=uid)
+    # ->
+    amount = 0
+    for order in user_orders:
+        amount += order.amount
+    # ->
+    response['amount'] = amount
+    response['count'] = len(user_orders)
+    return JsonResponse(response)
+
+
+
 def index(request):
     return render(request, 'orders/index.html', context={
         'title': 'Управління кошиком',
