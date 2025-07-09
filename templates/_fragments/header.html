@@ -70,39 +70,16 @@
 							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 								<i class="fa fa-shopping-cart"></i>
 								<span>Кошик</span>
-								<div class="qty">0</div>
+								<div id="count" class="qty">0</div>
 							</a>
 							<div class="cart-dropdown">
-								<div class="cart-list">
-									<div class="product-widget">
-										<div class="product-img">
-											<img src="{% static 'img/product01.png' %}" alt="">
-										</div>
-										<div class="product-body">
-											<h3 class="product-name"><a href="#">Назва товару</a></h3>
-											<h4 class="product-price"><span class="qty">1x</span>980.00 грн</h4>
-										</div>
-										<button class="delete"><i class="fa fa-close"></i></button>
-									</div>
-
-									<div class="product-widget">
-										<div class="product-img">
-											<img src="{% static 'img/product02.png' %}" alt="">
-										</div>
-										<div class="product-body">
-											<h3 class="product-name"><a href="#">Вартість товару</a></h3>
-											<h4 class="product-price"><span class="qty">3x</span>980.00 грн</h4>
-										</div>
-										<button class="delete"><i class="fa fa-close"></i></button>
-									</div>
-								</div>
 								<div class="cart-summary">
-									<small>3 товари обрано</small>
-									<h5>ВАРТІСТЬ: 2940.00 грн</h5>
+									<h5 id="_count">Товарів у кошику: 0 шт</h5>
+									<h5 id="_amount">ВАРТІСТЬ: 0.00 грн</h5>
 								</div>
 								<div class="cart-btns">
-									<a href="#">Перейти до кошика</a>
-									<a href="#">Перейти до замовлення  <i class="fa fa-arrow-circle-right"></i></a>
+									<a href="/orders">Перегляд</a>
+									<a href="#">Замовлення  <i class="fa fa-arrow-circle-right"></i></a>
 								</div>
 							</div>
 						</div>
