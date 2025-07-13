@@ -1,0 +1,32 @@
+{% extends '_layouts/base.html' %}
+
+{% block content %}
+    <div class="content-panel">
+        <div class="section">
+		<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<!-- ------------------------------------------------------------ -->
+                    <form id="form2" action="/orders/confirm/{{ init_list }}" method="post">
+                        {% csrf_token %}
+                        <p style="color: purple;">
+                            <label for="email">
+                                Введіть ваш E-Mail для звязку зу службою доставки:
+                            </label>
+                            <br>
+                            <input type="email" name="email" id="email" class="inp" required>
+                            <span id="email-error" class="error"></span>
+                        </p>
+                        <p>
+
+                        </p>
+                    </form>
+					<!-- ------------------------------------------------------------ -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+    </div>
+{% endblock %}

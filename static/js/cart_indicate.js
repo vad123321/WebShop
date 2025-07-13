@@ -6,7 +6,7 @@ $(document).ready(() =>{
     console.log('userId: ', userId);
 
     $.ajax({
-        url: '/orders/ajax_cart_indecate',
+        url: '/orders/ajax_cart_indicate',
         data: `uid=${userId}`,
         success: (response) => {
             $('#count').text(response.count);
