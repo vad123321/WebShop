@@ -12,6 +12,25 @@
 				<li><a href="/news">Новини</a></li>
 				<li><a href="/contacts">Контакти</a></li>
 			</ul>
+			<ul class="main-nav nav navbar-nav navbar-right">
+				<li>
+					<a href="#" style="margin-right: 50px;">
+						Привіт,
+						{% if user.is_authenticated %}
+							{{ user.username }}!
+						{% else %}
+							Гість!
+						{% endif %}
+					</a>
+				</li>
+				{% if not user.is_authenticated %}
+					<li><a href="/accounts/signin">Вхід</a></li>
+					<li><a href="/accounts/signup">Реєстрація</a></li>
+				{% else %}
+					<li><a href="/accounts/signout">Вихід</a></li>
+					<li><a href="/accounts/profile">Профіль</a></li>
+				{% endif %}
+			</ul>
 			<!-- /NAV -->
 		</div> 
 		<!-- /responsive-nav -->
