@@ -4,12 +4,10 @@
 {% load static %}
     <div class="content-panel">
         <div class="section">
-		<!-- container -->
 			<div class="container">
-				<!-- row -->
 				<div class="row">
 					<!-- ------------------------------------------------------------------------------- -->
-                    <form id="form1" action="/accounts/signup" method="post" onsubmit="return true">
+                    <form id="form1" action="/accounts/signup" method="post" onsubmit="return false">
                         {% csrf_token %}
                         <div class="form-group mb-2">
                             <label for="login" class="form-label">Логін</label>
@@ -38,9 +36,7 @@
                     </form>
 					<!-- ------------------------------------------------------------------------------- -->
 				</div>
-				<!-- /row -->
 			</div>
-			<!-- /container -->
 		</div>
     </div>
     <style>
@@ -55,6 +51,7 @@
         .error {
             color: red;
             font-style: italic;
+            font-size: 0.9em;
         }
         label {
             color: teal;

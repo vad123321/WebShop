@@ -1,21 +1,59 @@
 {% extends '_layouts/base.html' %}
 
 {% block content %}
+{% load static %}
     <div class="content-panel">
         <div class="section">
 		<!-- container -->
 			<div class="container">
 				<!-- row -->
 				<div class="row">
-					<!-- ------------------------------------------------------------ -->
-                    <h3 style="color:darkcyan; text-align: center; font-style: italic;">
-                        {{ title }}
-                    </h3>
-					<!-- ------------------------------------------------------------ -->
+					<!-- ------------------------------------------------------------------------------- -->
+                    <form id="form2" action="/accounts/signin" method="post">
+                        {% csrf_token %}
+                        <div class="form-group mb-2">
+                            <label for="login" class="form-label">Логін</label>
+                            <input type="text" id="username" name="username" class="form-control" required>
+                            <span id="login-err" class="error"></span>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label for="pass1" class="form-label">Пароль</label>
+                            <input type="password" id="pass1" name="pass1" class="form-control" required>
+                            <span id="pass1-err" class="error"></span>
+                        </div>
+                        <div class="form-group mb-2 text-center">
+                            <input type="submit" id="submit" value="Відправити" class="btn btn-success my">
+                            <input type="reset" id="reset" value="Очистити" class="btn btn-primary my">
+                        </div>
+                    </form>
+					<!-- ------------------------------------------------------------------------------- -->
 				</div>
 				<!-- /row -->
 			</div>
 			<!-- /container -->
 		</div>
     </div>
+    <style>
+        #form2 {
+            border: 1px solid silver;
+            border-radius: 15px;
+            padding: 20px 40px;
+            width: 400px;
+            margin: auto;
+            background-color: whitesmoke;
+        }
+        .error {
+            color: red;
+            font-style: italic;
+        }
+        label {
+            color: teal;
+            margin-bottom: 2px;
+        }
+        .my {
+            width: 120px;
+            margin-top: 15px;
+            margin-right: 5;
+        }
+    </style>
 {% endblock %}

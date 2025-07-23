@@ -7,4 +7,5 @@ urlpatterns = [
     path('signout', views.signout),
     path('profile', views.profile),
     path('ajaxreg', views.ajaxreg),
+    path('activate/<str:uidb64>/<str:token>/', views.activate, name='activate'),
 ]
